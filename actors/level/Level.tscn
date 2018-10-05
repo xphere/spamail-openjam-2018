@@ -1,0 +1,40 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://actors/level/Level.gd" type="Script" id=1]
+[ext_resource path="res://actors/level/Playground.gd" type="Script" id=2]
+[ext_resource path="res://actors/level/Factory.gd" type="Script" id=3]
+[ext_resource path="res://actors/envelope/Envelope.tscn" type="PackedScene" id=4]
+
+[node name="Level" type="Control"]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+script = ExtResource( 1 )
+
+[node name="Playground" type="Node2D" parent="."]
+position = Vector2( 152, 80 )
+script = ExtResource( 2 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="Corner" type="Position2D" parent="Playground"]
+position = Vector2( 720, 440 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="Factory" type="Node" parent="."]
+script = ExtResource( 3 )
+envelopeScene = ExtResource( 4 )
+
+[node name="Timer" type="Timer" parent="."]
+process_mode = 1
+wait_time = 1.0
+one_shot = false
+autostart = false
+
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
