@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://actors/level/Level.gd" type="Script" id=1]
 [ext_resource path="res://actors/level/Playground.gd" type="Script" id=2]
@@ -6,12 +6,22 @@
 [ext_resource path="res://actors/envelope/Envelope.tscn" type="PackedScene" id=4]
 [ext_resource path="res://actors/level/Timer.gd" type="Script" id=5]
 
+[sub_resource type="RectangleShape2D" id=2]
+
+custom_solver_bias = 0.0
+extents = Vector2( 5, 330 )
+
+[sub_resource type="RectangleShape2D" id=3]
+
+custom_solver_bias = 0.0
+extents = Vector2( 540, 5 )
+
 [sub_resource type="Curve" id=1]
 
 min_value = 0.1
 max_value = 2.0
 bake_resolution = 100
-_data = [ Vector2( 0, 2 ), 0.0, 0.0, 0, 0, Vector2( 0.0544842, 1.48472 ), 0.0, 0.0, 0, 0, Vector2( 0.412152, 0.93296 ), -4.3448, 0.933498, 0, 0, Vector2( 1, 0.1 ), 0.0, 0.0, 0, 0 ]
+_data = [ Vector2( 0, 0.56512 ), 0.0, 0.0, 0, 0, Vector2( 0.241617, 0.41464 ), 0.0, 0.0, 0, 0, Vector2( 0.56294, 0.23072 ), -4.3448, 0.933498, 0, 0, Vector2( 1, 0.1 ), 0.0, 0.0, 0, 0 ]
 
 [node name="Level" type="Control"]
 anchor_left = 0.0
@@ -25,15 +35,37 @@ mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
 script = ExtResource( 1 )
+_sections_unfolded = [ "Rect", "curve" ]
 
-[node name="Playground" type="Node2D" parent="."]
+[node name="Playground" type="StaticBody2D" parent="."]
 position = Vector2( 152, 80 )
+input_pickable = false
+collision_layer = 1
+collision_mask = 1
+constant_linear_velocity = Vector2( 0, 0 )
+constant_angular_velocity = 0.0
 script = ExtResource( 2 )
 _sections_unfolded = [ "Transform" ]
 
 [node name="Corner" type="Position2D" parent="Playground"]
 position = Vector2( 720, 440 )
 _sections_unfolded = [ "Transform" ]
+
+[node name="CollisionLeft" type="CollisionShape2D" parent="Playground"]
+position = Vector2( -50, 220 )
+shape = SubResource( 2 )
+
+[node name="CollisionRight" type="CollisionShape2D" parent="Playground"]
+position = Vector2( 770, 220 )
+shape = SubResource( 2 )
+
+[node name="CollisionUp" type="CollisionShape2D" parent="Playground"]
+position = Vector2( 360, -50 )
+shape = SubResource( 3 )
+
+[node name="CollisionDown" type="CollisionShape2D" parent="Playground"]
+position = Vector2( 360, 490 )
+shape = SubResource( 3 )
 
 [node name="Factory" type="Node" parent="."]
 script = ExtResource( 3 )

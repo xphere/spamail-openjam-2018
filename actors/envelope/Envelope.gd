@@ -6,8 +6,9 @@ var label
 
 
 func set_label(label : String) -> void:
-	$Letter/Label.text = label
+	$Pivot/Letter/Label.text = label
 	self.label = label
+
 
 func kill() -> void:
 	queue_free()
