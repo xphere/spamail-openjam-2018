@@ -33,7 +33,7 @@ envelopeScene = ExtResource( 4 )
 
 [node name="Timer" type="Timer" parent="."]
 process_mode = 1
-wait_time = 1.0
+wait_time = 0.05
 one_shot = false
 autostart = false
 
