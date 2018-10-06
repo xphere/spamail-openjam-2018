@@ -1,9 +1,17 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://actors/level/Level.gd" type="Script" id=1]
 [ext_resource path="res://actors/level/Playground.gd" type="Script" id=2]
 [ext_resource path="res://actors/level/Factory.gd" type="Script" id=3]
 [ext_resource path="res://actors/envelope/Envelope.tscn" type="PackedScene" id=4]
+[ext_resource path="res://actors/level/Timer.gd" type="Script" id=5]
+
+[sub_resource type="Curve" id=1]
+
+min_value = 0.1
+max_value = 2.0
+bake_resolution = 100
+_data = [ Vector2( 0, 2 ), 0.0, 0.0, 0, 0, Vector2( 0.0544842, 1.48472 ), 0.0, 0.0, 0, 0, Vector2( 0.412152, 0.93296 ), -4.3448, 0.933498, 0, 0, Vector2( 1, 0.1 ), 0.0, 0.0, 0, 0 ]
 
 [node name="Level" type="Control"]
 anchor_left = 0.0
@@ -36,7 +44,12 @@ process_mode = 1
 wait_time = 0.05
 one_shot = false
 autostart = false
+script = ExtResource( 5 )
+_sections_unfolded = [ "curve" ]
+curve = SubResource( 1 )
+length = null
 
 [connection signal="more_envelopes" from="Factory" to="." method="_on_Factory_more_envelopes"]
 [connection signal="no_more_envelopes" from="Factory" to="." method="_on_Factory_no_more_envelopes"]
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
+[connection signal="timeout" from="Timer" to="Timer" method="_on_Timer_timeout"]

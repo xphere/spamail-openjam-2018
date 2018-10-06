@@ -22,3 +22,7 @@ _global_script_class_icons={
 
 config/name="OpenJam 2018"
 config/icon="res://icon.png"
+
+[physics]
+
+2d/default_gravity=0
