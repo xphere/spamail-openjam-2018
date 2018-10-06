@@ -4,10 +4,14 @@ onready var dimensions : Vector2 = $Corner.position
 
 
 func add_envelope(envelope: Envelope) -> void:
-	envelope.position = Vector2(
-		randf() * dimensions.x,
-		randf() * dimensions.y
-	)
+	var center = dimensions / 2.0
+	var angle = randf() * 2.0 * PI
+	var spawning_vector = Vector2(0.0, 600.0).rotated(angle)
+	var spawning_position = center + spawning_vector
+
+	envelope.position = spawning_position
+	envelope.apply_central_impulse(-spawning_vector)
+
 	add_child(envelope)
 
 
