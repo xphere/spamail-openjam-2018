@@ -40,7 +40,6 @@ mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
 script = ExtResource( 1 )
-_sections_unfolded = [ "Rect", "curve" ]
 
 [node name="Playground" type="StaticBody2D" parent="."]
 position = Vector2( 152, 80 )
@@ -50,11 +49,9 @@ collision_mask = 1
 constant_linear_velocity = Vector2( 0, 0 )
 constant_angular_velocity = 0.0
 script = ExtResource( 2 )
-_sections_unfolded = [ "Transform" ]
 
 [node name="Corner" type="Position2D" parent="Playground"]
 position = Vector2( 720, 440 )
-_sections_unfolded = [ "Transform" ]
 
 [node name="CollisionLeft" type="CollisionShape2D" parent="Playground"]
 position = Vector2( -50, 220 )
@@ -97,7 +94,6 @@ wait_time = 0.05
 one_shot = false
 autostart = false
 script = ExtResource( 5 )
-_sections_unfolded = [ "curve" ]
 curve = SubResource( 4 )
 length = null
 

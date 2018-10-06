@@ -66,5 +66,4 @@ group = null
 texture_normal = ExtResource( 3 )
 expand = true
 stretch_mode = 3
-_sections_unfolded = [ "Textures" ]
 
