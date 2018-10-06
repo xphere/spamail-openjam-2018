@@ -23,3 +23,7 @@ func _on_Timer_timeout() -> void:
 
 func _on_Factory_no_more_envelopes():
 	$Timer.stop()
+
+
+func _on_Factory_more_envelopes():
+	$Timer.start()

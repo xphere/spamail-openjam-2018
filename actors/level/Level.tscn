@@ -37,5 +37,6 @@ wait_time = 0.05
 one_shot = false
 autostart = false
 
+[connection signal="more_envelopes" from="Factory" to="." method="_on_Factory_more_envelopes"]
 [connection signal="no_more_envelopes" from="Factory" to="." method="_on_Factory_no_more_envelopes"]
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
