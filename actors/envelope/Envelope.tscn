@@ -8,7 +8,7 @@
 [ext_resource path="res://actors/envelope/flap-closed.png" type="Texture" id=6]
 [ext_resource path="res://actors/envelope/front.png" type="Texture" id=7]
 
-[sub_resource type="DynamicFont" id=2]
+[sub_resource type="DynamicFont" id=1]
 
 size = 48
 outline_size = 0
@@ -18,15 +18,15 @@ use_filter = false
 font_data = ExtResource( 5 )
 _sections_unfolded = [ "Font" ]
 
-[sub_resource type="CircleShape2D" id=3]
+[sub_resource type="CircleShape2D" id=2]
 
 custom_solver_bias = 0.0
 radius = 48.0
 
 [node name="Envelope" type="RigidBody2D"]
 input_pickable = false
-collision_layer = 1
-collision_mask = 1
+collision_layer = 2
+collision_mask = 4
 mode = 0
 mass = 1.0
 gravity_scale = 1.0
@@ -76,7 +76,7 @@ mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 4
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 1 )
 text = "A"
 align = 1
 valign = 1
@@ -101,6 +101,6 @@ _sections_unfolded = [ "Offset" ]
 [node name="Collision" type="CollisionShape2D" parent="."]
 position = Vector2( 0, -16 )
 rotation = 1.5708
-shape = SubResource( 3 )
+shape = SubResource( 2 )
 _sections_unfolded = [ "Transform" ]
 

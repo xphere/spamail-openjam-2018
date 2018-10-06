@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://actors/level/Level.gd" type="Script" id=1]
 [ext_resource path="res://actors/level/Playground.gd" type="Script" id=2]
@@ -6,17 +6,22 @@
 [ext_resource path="res://actors/envelope/Envelope.tscn" type="PackedScene" id=4]
 [ext_resource path="res://actors/level/Timer.gd" type="Script" id=5]
 
-[sub_resource type="RectangleShape2D" id=2]
+[sub_resource type="RectangleShape2D" id=1]
 
 custom_solver_bias = 0.0
 extents = Vector2( 5, 330 )
 
-[sub_resource type="RectangleShape2D" id=3]
+[sub_resource type="RectangleShape2D" id=2]
 
 custom_solver_bias = 0.0
 extents = Vector2( 540, 5 )
 
-[sub_resource type="Curve" id=1]
+[sub_resource type="RectangleShape2D" id=3]
+
+custom_solver_bias = 0.0
+extents = Vector2( 360, 220 )
+
+[sub_resource type="Curve" id=4]
 
 min_value = 0.1
 max_value = 2.0
@@ -53,23 +58,34 @@ _sections_unfolded = [ "Transform" ]
 
 [node name="CollisionLeft" type="CollisionShape2D" parent="Playground"]
 position = Vector2( -50, 220 )
-shape = SubResource( 2 )
-_sections_unfolded = [ "Transform", "shape" ]
+shape = SubResource( 1 )
 
 [node name="CollisionRight" type="CollisionShape2D" parent="Playground"]
 position = Vector2( 770, 220 )
-shape = SubResource( 2 )
-_sections_unfolded = [ "Transform", "shape" ]
+shape = SubResource( 1 )
 
 [node name="CollisionUp" type="CollisionShape2D" parent="Playground"]
 position = Vector2( 360, -50 )
-shape = SubResource( 3 )
-_sections_unfolded = [ "Transform", "shape" ]
+shape = SubResource( 2 )
 
 [node name="CollisionDown" type="CollisionShape2D" parent="Playground"]
 position = Vector2( 360, 490 )
+shape = SubResource( 2 )
+
+[node name="GameArea" type="Area2D" parent="Playground"]
+position = Vector2( 360, 220 )
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+collision_layer = 4
+collision_mask = 2
+audio_bus_override = false
+audio_bus_name = "Master"
+
+[node name="Collision" type="CollisionShape2D" parent="Playground/GameArea"]
 shape = SubResource( 3 )
-_sections_unfolded = [ "Transform", "shape" ]
 
 [node name="Factory" type="Node" parent="."]
 script = ExtResource( 3 )
@@ -82,9 +98,10 @@ one_shot = false
 autostart = false
 script = ExtResource( 5 )
 _sections_unfolded = [ "curve" ]
-curve = SubResource( 1 )
+curve = SubResource( 4 )
 length = null
 
+[connection signal="body_entered" from="Playground/GameArea" to="Playground" method="_on_GameArea_body_entered"]
 [connection signal="more_envelopes" from="Factory" to="." method="_on_Factory_more_envelopes"]
 [connection signal="no_more_envelopes" from="Factory" to="." method="_on_Factory_no_more_envelopes"]
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
