@@ -54,18 +54,22 @@ _sections_unfolded = [ "Transform" ]
 [node name="CollisionLeft" type="CollisionShape2D" parent="Playground"]
 position = Vector2( -50, 220 )
 shape = SubResource( 2 )
+_sections_unfolded = [ "Transform", "shape" ]
 
 [node name="CollisionRight" type="CollisionShape2D" parent="Playground"]
 position = Vector2( 770, 220 )
 shape = SubResource( 2 )
+_sections_unfolded = [ "Transform", "shape" ]
 
 [node name="CollisionUp" type="CollisionShape2D" parent="Playground"]
 position = Vector2( 360, -50 )
 shape = SubResource( 3 )
+_sections_unfolded = [ "Transform", "shape" ]
 
 [node name="CollisionDown" type="CollisionShape2D" parent="Playground"]
 position = Vector2( 360, 490 )
 shape = SubResource( 3 )
+_sections_unfolded = [ "Transform", "shape" ]
 
 [node name="Factory" type="Node" parent="."]
 script = ExtResource( 3 )
