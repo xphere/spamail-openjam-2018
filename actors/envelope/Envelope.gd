@@ -14,7 +14,9 @@ func kill() -> void:
 	queue_free()
 
 
-func set_color(color : Color) -> void:
+func set_category(category) -> void:
+	var color = category.color
+
 	$Pivot/Back.modulate = color
 	$Pivot/Opened.modulate = color
 	$Pivot/Closed.modulate = color

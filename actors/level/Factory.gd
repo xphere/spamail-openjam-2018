@@ -5,11 +5,12 @@ signal more_envelopes()
 
 export var envelopeScene : PackedScene
 var available_characters : String = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
-var available_colors : Array = [
-	Color(1.0, 0.0, 0.0),
-	Color(0.0, 1.0, 0.0),
-	Color(0.0, 0.0, 1.0),
-]
+var available_categories : Array
+
+
+func set_available_categories(categories):
+	available_categories = categories
+
 
 func create_random_envelope() -> Envelope:
 	var envelope = envelopeScene.instance()
@@ -18,8 +19,8 @@ func create_random_envelope() -> Envelope:
 	var label = available_characters[char_index]
 	envelope.set_label(label)
 
-	var color = available_colors[randi() % available_colors.size()]
-	envelope.set_color(color)
+	var category = available_categories[randi() % available_categories.size()]
+	envelope.set_category(category)
 
 	envelope.connect("tree_exiting", self, "_on_envelope_tree_exiting", [label])
 	available_characters.erase(char_index, 1)

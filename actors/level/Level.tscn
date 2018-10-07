@@ -1,11 +1,17 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://actors/level/Level.gd" type="Script" id=1]
 [ext_resource path="res://actors/level/background.png" type="Texture" id=2]
-[ext_resource path="res://actors/level/Playground.gd" type="Script" id=3]
-[ext_resource path="res://actors/level/Factory.gd" type="Script" id=4]
-[ext_resource path="res://actors/envelope/Envelope.tscn" type="PackedScene" id=5]
-[ext_resource path="res://actors/level/Timer.gd" type="Script" id=6]
+[ext_resource path="res://actors/level/Sidebar.gd" type="Script" id=3]
+[ext_resource path="res://actors/level/Playground.gd" type="Script" id=4]
+[ext_resource path="res://actors/level/Factory.gd" type="Script" id=5]
+[ext_resource path="res://actors/envelope/Envelope.tscn" type="PackedScene" id=6]
+[ext_resource path="res://actors/level/Timer.gd" type="Script" id=7]
+
+[sub_resource type="RectangleShape2D" id=5]
+
+custom_solver_bias = 0.0
+extents = Vector2( 80, 300 )
 
 [sub_resource type="RectangleShape2D" id=1]
 
@@ -25,9 +31,9 @@ extents = Vector2( 360, 220 )
 [sub_resource type="Curve" id=4]
 
 min_value = 0.1
-max_value = 2.0
+max_value = 1.0
 bake_resolution = 100
-_data = [ Vector2( 0, 0.56512 ), 0.0, 0.0, 0, 0, Vector2( 0.241617, 0.41464 ), 0.0, 0.0, 0, 0, Vector2( 0.56294, 0.23072 ), -4.3448, 0.933498, 0, 0, Vector2( 1, 0.1 ), 0.0, 0.0, 0, 0 ]
+_data = [ Vector2( 0, 0.79552 ), 0.0, 0.0, 0, 0, Vector2( 0.448074, 0.53416 ), 0.0, 0.0, 0, 0, Vector2( 0.89213, 0.17776 ), -4.3448, 0.933498, 0, 0, Vector2( 1, 0.1 ), 0.0, 0.0, 0, 0 ]
 
 [node name="Level" type="Control"]
 anchor_left = 0.0
@@ -58,6 +64,110 @@ size_flags_vertical = 1
 texture = ExtResource( 2 )
 stretch_mode = 0
 
+[node name="Sidebar" type="Area2D" parent="."]
+position = Vector2( 80, 300 )
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+collision_layer = 8
+collision_mask = 8
+audio_bus_override = false
+audio_bus_name = "Master"
+script = ExtResource( 3 )
+
+[node name="Selector" type="ColorRect" parent="Sidebar"]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 72.0
+margin_top = -236.0
+margin_right = 88.0
+margin_bottom = -112.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+color = Color( 0.93, 0.93, 0.93, 1 )
+
+[node name="Collision" type="CollisionShape2D" parent="Sidebar"]
+visible = false
+shape = SubResource( 5 )
+
+[node name="Categories" type="Node2D" parent="Sidebar"]
+
+[node name="Travel" type="ColorRect" parent="Sidebar/Categories"]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 36.0
+margin_top = -194.0
+margin_right = 72.0
+margin_bottom = -175.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+color = Color( 1, 0.85, 0.77, 1 )
+
+[node name="Work" type="ColorRect" parent="Sidebar/Categories"]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 36.0
+margin_top = -173.0
+margin_right = 72.0
+margin_bottom = -154.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+color = Color( 0.97, 0.77, 1, 1 )
+
+[node name="Social" type="ColorRect" parent="Sidebar/Categories"]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 36.0
+margin_top = -152.0
+margin_right = 72.0
+margin_bottom = -133.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+color = Color( 0.77, 0.85, 1, 1 )
+
+[node name="Spam" type="ColorRect" parent="Sidebar/Categories"]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 36.0
+margin_top = -131.0
+margin_right = 72.0
+margin_bottom = -112.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+color = Color( 0, 0, 0, 1 )
+
 [node name="Playground" type="StaticBody2D" parent="."]
 position = Vector2( 225, 80 )
 input_pickable = false
@@ -65,7 +175,7 @@ collision_layer = 1
 collision_mask = 1
 constant_linear_velocity = Vector2( 0, 0 )
 constant_angular_velocity = 0.0
-script = ExtResource( 3 )
+script = ExtResource( 4 )
 
 [node name="Corner" type="Position2D" parent="Playground"]
 position = Vector2( 720, 440 )
@@ -102,15 +212,15 @@ audio_bus_name = "Master"
 shape = SubResource( 3 )
 
 [node name="Factory" type="Node" parent="."]
-script = ExtResource( 4 )
-envelopeScene = ExtResource( 5 )
+script = ExtResource( 5 )
+envelopeScene = ExtResource( 6 )
 
 [node name="Timer" type="Timer" parent="."]
 process_mode = 1
 wait_time = 0.05
 one_shot = false
 autostart = false
-script = ExtResource( 6 )
+script = ExtResource( 7 )
 curve = SubResource( 4 )
 length = null
 
