@@ -12,3 +12,10 @@ func set_label(label : String) -> void:
 
 func kill() -> void:
 	queue_free()
+
+
+func set_color(color : Color) -> void:
+	$Pivot/Back.modulate = color
+	$Pivot/Opened.modulate = color
+	$Pivot/Closed.modulate = color
+	$Pivot/Front.modulate = color
