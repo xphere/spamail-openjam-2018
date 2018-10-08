@@ -56,3 +56,11 @@ func _on_Playground_sent_envelope(envelope: Envelope) -> void:
 	var impulse = $Sidebar.current_category.rect_global_position - envelope.global_position
 	envelope.linear_velocity = Vector2()
 	envelope.apply_central_impulse(impulse)
+
+
+func _on_Sidebar_wrong_category() -> void:
+	$Inbox.add_message("Whatever")
+
+
+func _on_Inbox_overflow() -> void:
+	get_tree().paused = true

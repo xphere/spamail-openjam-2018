@@ -20,6 +20,7 @@ func _on_Sidebar_body_entered(body: PhysicsBody2D) -> void:
 
 	if body.tainted:
 		emit_signal("wrong_category")
+		$Inbox.add_score(1)
 	else:
 		body.category.add_score(1)
 
