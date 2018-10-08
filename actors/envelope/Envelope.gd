@@ -23,6 +23,7 @@ var tainted = false
 
 func _ready() -> void:
 	timer.hide()
+	$AnimationPlayer.queue("Idle")
 
 
 func set_timed() -> void:
@@ -64,6 +65,8 @@ func is_ingame() -> bool:
 
 func send() -> void:
 	assert state == STATE_INGAME
+
+	$Timer.queue_free()
 	state = STATE_SENT
 
 	set_collision_layer_bit(3, true)

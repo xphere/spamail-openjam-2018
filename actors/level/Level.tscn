@@ -1,15 +1,16 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://actors/level/Level.gd" type="Script" id=1]
 [ext_resource path="res://actors/level/background.png" type="Texture" id=2]
 [ext_resource path="res://actors/inbox/Inbox.tscn" type="PackedScene" id=3]
 [ext_resource path="res://actors/level/Sidebar.gd" type="Script" id=4]
-[ext_resource path="res://actors/level/Category.gd" type="Script" id=5]
+[ext_resource path="res://actors/level/Inbox.gd" type="Script" id=5]
 [ext_resource path="res://theme/Roboto-Regular.ttf" type="DynamicFontData" id=6]
-[ext_resource path="res://actors/level/Playground.gd" type="Script" id=7]
-[ext_resource path="res://actors/level/Factory.gd" type="Script" id=8]
-[ext_resource path="res://actors/envelope/Envelope.tscn" type="PackedScene" id=9]
-[ext_resource path="res://actors/level/Timer.gd" type="Script" id=10]
+[ext_resource path="res://actors/level/Category.gd" type="Script" id=7]
+[ext_resource path="res://actors/level/Playground.gd" type="Script" id=8]
+[ext_resource path="res://actors/level/Factory.gd" type="Script" id=9]
+[ext_resource path="res://actors/envelope/Envelope.tscn" type="PackedScene" id=10]
+[ext_resource path="res://actors/level/Timer.gd" type="Script" id=11]
 
 [sub_resource type="RectangleShape2D" id=1]
 
@@ -99,7 +100,7 @@ anchor_bottom = 1.0
 margin_left = 72.0
 margin_top = -236.0
 margin_right = 88.0
-margin_bottom = -112.0
+margin_bottom = 271.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 0
@@ -117,7 +118,7 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 36.0
+margin_left = -15.0
 margin_top = -236.0
 margin_right = 72.0
 margin_bottom = -217.0
@@ -137,6 +138,7 @@ anchor_top = 0.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_right = -2.0
+grow_horizontal = 0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 2
@@ -168,7 +170,7 @@ mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
 color = Color( 1, 0.85, 0.77, 1 )
-script = ExtResource( 5 )
+script = ExtResource( 7 )
 
 [node name="Label" type="Label" parent="Sidebar/Categories/Travel"]
 modulate = Color( 0, 0, 0, 1 )
@@ -206,7 +208,7 @@ mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
 color = Color( 0.97, 0.77, 1, 1 )
-script = ExtResource( 5 )
+script = ExtResource( 7 )
 
 [node name="Label" type="Label" parent="Sidebar/Categories/Work"]
 modulate = Color( 0, 0, 0, 1 )
@@ -244,7 +246,7 @@ mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
 color = Color( 0.77, 0.85, 1, 1 )
-script = ExtResource( 5 )
+script = ExtResource( 7 )
 
 [node name="Label" type="Label" parent="Sidebar/Categories/Social"]
 modulate = Color( 0, 0, 0, 1 )
@@ -282,7 +284,7 @@ mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
 color = Color( 0, 0, 0, 1 )
-script = ExtResource( 5 )
+script = ExtResource( 7 )
 
 [node name="Label" type="Label" parent="Sidebar/Categories/Spam"]
 anchor_left = 0.0
@@ -310,7 +312,7 @@ collision_layer = 1
 collision_mask = 1
 constant_linear_velocity = Vector2( 0, 0 )
 constant_angular_velocity = 0.0
-script = ExtResource( 7 )
+script = ExtResource( 8 )
 
 [node name="Corner" type="Position2D" parent="Playground"]
 position = Vector2( 720, 440 )
@@ -347,8 +349,8 @@ audio_bus_name = "Master"
 shape = SubResource( 5 )
 
 [node name="Factory" type="Node" parent="."]
-script = ExtResource( 8 )
-envelope_scene = ExtResource( 9 )
+script = ExtResource( 9 )
+envelope_scene = ExtResource( 10 )
 spam_category = NodePath("../Sidebar/Categories/Spam")
 
 [node name="Timer" type="Timer" parent="."]
@@ -356,7 +358,7 @@ process_mode = 1
 wait_time = 0.05
 one_shot = false
 autostart = false
-script = ExtResource( 10 )
+script = ExtResource( 11 )
 curve = SubResource( 6 )
 length = null
 

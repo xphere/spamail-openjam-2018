@@ -1,16 +1,9 @@
-extends VBoxContainer
+extends ColorRect
 
-signal overflow()
-
-export var messageScene : PackedScene
-export var MAX_CAPACITY : int = 20
+var current : int = 0
+var max_capacity : int = 20
 
 
-func add_message(subject: String) -> void:
-	if get_child_count() >= MAX_CAPACITY:
-		emit_signal("overflow")
-		return
-
-	var message = messageScene.instance()
-	message.get_node("Label").text = subject
-	add_child(message)
+func add_score(value: int) -> void:
+	current += value
+	$Label.text = "%d / %d" % [ current, max_capacity ]

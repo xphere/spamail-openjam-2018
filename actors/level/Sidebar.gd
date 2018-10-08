@@ -14,13 +14,17 @@ func set_current_category(category_name: String) -> void:
 	$Selector.modulate = current_category.color
 
 
+func tainted_envelope() -> void:
+	emit_signal("wrong_category")
+	$Inbox.add_score(1)
+
+
 func _on_Sidebar_body_entered(body: PhysicsBody2D) -> void:
 	if not body is Envelope:
 		return
 
 	if body.tainted:
-		emit_signal("wrong_category")
-		$Inbox.add_score(1)
+		tainted_envelope()
 	else:
 		body.category.add_score(1)
 
