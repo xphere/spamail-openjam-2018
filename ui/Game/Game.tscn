@@ -22,7 +22,6 @@ mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
 script = ExtResource( 1 )
-_sections_unfolded = [ "Pause" ]
 level_scene = ExtResource( 2 )
 
 [node name="PauseMenu" type="Popup" parent="."]
@@ -38,7 +37,6 @@ mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
 popup_exclusive = true
-_sections_unfolded = [ "Pause", "Popup" ]
 
 [node name="Background" type="TextureRect" parent="PauseMenu"]
 anchor_left = 0.0
@@ -90,7 +88,6 @@ shortcut = null
 group = null
 texture_normal = ExtResource( 5 )
 stretch_mode = 4
-_sections_unfolded = [ "Textures" ]
 
 [node name="back-to-play" type="TextureButton" parent="PauseMenu"]
 anchor_left = 0.0
@@ -114,7 +111,6 @@ shortcut = null
 group = null
 texture_normal = ExtResource( 6 )
 stretch_mode = 4
-_sections_unfolded = [ "Textures" ]
 
 [node name="ButtonClick" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 7 )
@@ -133,7 +129,6 @@ autoplay = false
 stream_paused = false
 mix_target = 0
 bus = "Master"
-_sections_unfolded = [ "stream" ]
 
 [connection signal="mouse_entered" from="PauseMenu/back-to-menu" to="." method="_on_button_entered"]
 [connection signal="pressed" from="PauseMenu/back-to-menu" to="." method="_on_backtomenu_pressed"]
