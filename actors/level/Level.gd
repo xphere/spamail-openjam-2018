@@ -42,7 +42,7 @@ func _ready() -> void:
 	$Factory.set_available_categories(categories)
 	_set_current_category(categories[0])
 
-	start()
+	$Timer.start()
 
 
 func _input(event : InputEvent) -> void:
@@ -56,10 +56,6 @@ func _input(event : InputEvent) -> void:
 
 	if event.scancode in category_by_scancode.keys():
 		_set_current_category(category_by_scancode[event.scancode])
-
-
-func start() -> void:
-	$Timer.start()
 
 
 func _set_current_category(category) -> void:

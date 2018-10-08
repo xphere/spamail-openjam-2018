@@ -7,8 +7,6 @@ var current_time : int = 0
 
 func _ready() -> void:
 	curve.bake_resolution = length
-	curve.bake()
-	_update_timeout()
 
 
 func _on_Timer_timeout():
@@ -17,4 +15,5 @@ func _on_Timer_timeout():
 
 
 func _update_timeout() -> void :
-	set_wait_time(curve.interpolate_baked(current_time * 1.0 / length))
+	var next_timeout = curve.interpolate_baked(current_time * 1.0 / length)
+	set_wait_time(next_timeout)

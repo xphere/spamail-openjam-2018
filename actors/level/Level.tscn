@@ -60,10 +60,10 @@ font_data = ExtResource( 6 )
 
 [sub_resource type="Curve" id=6]
 
-min_value = 0.1
-max_value = 1.0
+min_value = 0.15
+max_value = 1.5
 bake_resolution = 100
-_data = [ Vector2( 0, 0.79552 ), 0.0, 0.0, 0, 0, Vector2( 0.448074, 0.53416 ), 0.0, 0.0, 0, 0, Vector2( 0.89213, 0.17776 ), -4.3448, 0.933498, 0, 0, Vector2( 1, 0.1 ), 0.0, 0.0, 0, 0 ]
+_data = [ Vector2( 0.0984083, 1.5 ), 0.0, 0.0, 0, 0, Vector2( 0.399602, 0.65296 ), 0.0, 0.476823, 0, 0, Vector2( 0.74472, 0.32824 ), 0.863595, 1.96751, 0, 0, Vector2( 1, 0.154 ), 0.0, 0.0, 0, 0 ]
 
 [node name="Level" type="Control"]
 anchor_left = 0.0
@@ -669,7 +669,7 @@ spam_category = NodePath("../Sidebar/Categories/Spam")
 
 [node name="Timer" type="Timer" parent="."]
 process_mode = 1
-wait_time = 0.05
+wait_time = 2.0
 one_shot = false
 autostart = false
 script = ExtResource( 18 )
