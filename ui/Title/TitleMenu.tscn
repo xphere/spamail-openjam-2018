@@ -1,9 +1,11 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://ui/Title/TitleMenu.gd" type="Script" id=1]
 [ext_resource path="res://ui/Title/title-background.png" type="Texture" id=2]
 [ext_resource path="res://ui/Title/title.png" type="Texture" id=3]
 [ext_resource path="res://ui/Title/play-button.png" type="Texture" id=4]
+[ext_resource path="res://sound/button-hover.ogg" type="AudioStream" id=5]
+[ext_resource path="res://sound/button-click.ogg" type="AudioStream" id=6]
 
 [node name="TitleMenu" type="Control"]
 anchor_left = 0.0
@@ -53,7 +55,10 @@ anchor_left = 0.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_top = -150.0
+margin_left = 334.0
+margin_top = -110.0
+margin_right = -334.0
+margin_bottom = -40.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 focus_mode = 2
@@ -90,4 +95,23 @@ size_flags_horizontal = 1
 size_flags_vertical = 1
 color = Color( 1, 1, 1, 0 )
 
+[node name="ButtonHover" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 5 )
+volume_db = 0.0
+pitch_scale = 1.0
+autoplay = false
+stream_paused = false
+mix_target = 0
+bus = "Master"
+
+[node name="ButtonClick" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 6 )
+volume_db = 0.0
+pitch_scale = 1.0
+autoplay = false
+stream_paused = false
+mix_target = 0
+bus = "Master"
+
+[connection signal="mouse_entered" from="PlayButton" to="." method="_on_PlayButton_mouse_entered"]
 [connection signal="pressed" from="PlayButton" to="." method="_on_PlayButton_pressed" flags=6]
