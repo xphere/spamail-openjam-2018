@@ -8,11 +8,11 @@ func _ready() -> void:
 
 	var current_scancode = KEY_F1
 	for category in categories:
-		category_by_scancode[current_scancode] = category.name
+		category_by_scancode[current_scancode] = category
 		current_scancode += 1
 
 	$Factory.set_available_categories(categories)
-	$Sidebar.set_current_category(categories[0].name)
+	_set_current_category(categories[0])
 
 	start()
 
@@ -27,11 +27,16 @@ func _input(event : InputEvent) -> void:
 		return
 
 	if event.scancode in category_by_scancode.keys():
-		$Sidebar.set_current_category(category_by_scancode[event.scancode])
+		_set_current_category(category_by_scancode[event.scancode])
 
 
 func start() -> void:
 	$Timer.start()
+
+
+func _set_current_category(category) -> void:
+	$Sidebar.set_current_category(category.name)
+	$Playground.set_current_category(category)
 
 
 func _on_Timer_timeout() -> void:
@@ -45,3 +50,9 @@ func _on_Factory_no_more_envelopes():
 
 func _on_Factory_more_envelopes():
 	$Timer.start()
+
+
+func _on_Playground_sent_envelope(envelope: Envelope) -> void:
+	var impulse = $Sidebar.current_category.rect_global_position - envelope.global_position
+	envelope.linear_velocity = Vector2()
+	envelope.apply_central_impulse(impulse)

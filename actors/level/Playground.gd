@@ -1,6 +1,9 @@
 extends Node
 
+signal sent_envelope(envelope)
+
 onready var dimensions : Vector2 = $Corner.position
+var current_category
 
 
 func add_envelope(envelope: Envelope) -> void:
@@ -11,18 +14,32 @@ func add_envelope(envelope: Envelope) -> void:
 
 	envelope.position = spawning_position
 	envelope.apply_central_impulse(-spawning_vector)
+	envelope.incoming()
 
 	add_child(envelope)
 
 
 func remove_envelope_by_label(label: String) -> void:
-	for child in get_children():
-		if child is Envelope and child.label == label:
-			child.kill()
+	for envelope in get_children():
+		if not envelope is Envelope:
+			continue
+
+		if not envelope.has_label(label) or not envelope.is_ingame():
+			continue
+
+		if envelope.category != current_category:
+			envelope.taint()
+
+		envelope.send()
+		emit_signal("sent_envelope", envelope)
 
 
-func _on_GameArea_body_entered(body: PhysicsBody2D) -> void:
-	body.set_collision_layer_bit(0, true)
-	body.set_collision_layer_bit(1, false)
-	body.set_collision_mask_bit(0, true)
-	body.set_collision_mask_bit(2, false)
+func set_current_category(category):
+	current_category = category
+
+
+func _on_GameArea_body_entered(body) -> void:
+	if not body is Envelope:
+		return
+
+	body.ingame()
