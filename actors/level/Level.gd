@@ -1,6 +1,7 @@
 extends Node
 
 var category_by_scancode = {}
+var factory_has_envelopes = true
 
 
 func _ready() -> void:
@@ -39,17 +40,24 @@ func _set_current_category(category) -> void:
 	$Playground.set_current_category(category)
 
 
+func _add_spam_to_inbox() -> void:
+	$Inbox.add_message("Whatever")
+
+
 func _on_Timer_timeout() -> void:
-	var envelope = $Factory.create_random_envelope()
-	$Playground.add_envelope(envelope)
+	if factory_has_envelopes:
+		var envelope = $Factory.create_random_envelope()
+		$Playground.add_envelope(envelope)
+	else:
+		_add_spam_to_inbox()
 
 
 func _on_Factory_no_more_envelopes():
-	$Timer.stop()
+	factory_has_envelopes = false
 
 
 func _on_Factory_more_envelopes():
-	$Timer.start()
+	factory_has_envelopes = true
 
 
 func _on_Playground_sent_envelope(envelope: Envelope) -> void:
@@ -59,7 +67,7 @@ func _on_Playground_sent_envelope(envelope: Envelope) -> void:
 
 
 func _on_Sidebar_wrong_category() -> void:
-	$Inbox.add_message("Whatever")
+	_add_spam_to_inbox()
 
 
 func _on_Inbox_overflow() -> void:

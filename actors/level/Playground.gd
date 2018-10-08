@@ -16,6 +16,8 @@ func add_envelope(envelope: Envelope) -> void:
 	envelope.apply_central_impulse(-spawning_vector)
 	envelope.incoming()
 
+	envelope.connect("timed_out", self, "_on_envelope_timed_out", [envelope])
+
 	add_child(envelope)
 
 
@@ -34,7 +36,7 @@ func remove_envelope_by_label(label: String) -> void:
 		emit_signal("sent_envelope", envelope)
 
 
-func set_current_category(category):
+func set_current_category(category) -> void:
 	current_category = category
 
 
@@ -43,3 +45,9 @@ func _on_GameArea_body_entered(body) -> void:
 		return
 
 	body.ingame()
+
+
+func _on_envelope_timed_out(envelope: Envelope) -> void:
+	envelope.send()
+	envelope.taint()
+	emit_signal("sent_envelope", envelope)

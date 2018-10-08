@@ -348,7 +348,8 @@ shape = SubResource( 5 )
 
 [node name="Factory" type="Node" parent="."]
 script = ExtResource( 8 )
-envelopeScene = ExtResource( 9 )
+envelope_scene = ExtResource( 9 )
+spam_category = NodePath("../Sidebar/Categories/Spam")
 
 [node name="Timer" type="Timer" parent="."]
 process_mode = 1

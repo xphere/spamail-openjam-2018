@@ -3,6 +3,7 @@ extends PhysicsBody2D
 class_name Envelope
 
 signal sent()
+signal timed_out()
 
 enum {
 	STATE_INCOMING,
@@ -10,10 +11,27 @@ enum {
 	STATE_SENT,
 }
 
+export(Color) var envelope_color : Color setget set_envelope_color
+
+onready var timer = $Timer
+
 var label
 var category
 var state
 var tainted = false
+
+
+func _ready() -> void:
+	timer.hide()
+
+
+func set_timed() -> void:
+	if timer == null:
+		call_deferred("set_timed")
+		return
+
+	timer.material = timer.material.duplicate()
+	timer.get_node("AnimationPlayer").play("Tick")
 
 
 func set_label(label: String) -> void:
@@ -64,12 +82,21 @@ func kill() -> void:
 	queue_free()
 
 
-func set_category(category) -> void:
-	var color = category.color
-
-	self.category = category
+func set_envelope_color(color: Color) -> void:
+	if not has_node("Pivot"):
+		return
 
 	$Pivot/Back.modulate = color
 	$Pivot/Opened.modulate = color
 	$Pivot/Closed.modulate = color
 	$Pivot/Front.modulate = color
+
+
+func set_category(category) -> void:
+	var color = category.color
+	self.category = category
+	set_envelope_color(color)
+
+
+func _on_AnimationPlayer_animation_finished(anim_name: String) -> void:
+	emit_signal("timed_out")
