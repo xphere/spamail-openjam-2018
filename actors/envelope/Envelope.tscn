@@ -9,14 +9,14 @@
 [ext_resource path="res://actors/envelope/flap-closed.png" type="Texture" id=7]
 [ext_resource path="res://actors/envelope/timer.png" type="Texture" id=8]
 
-[sub_resource type="PhysicsMaterial" id=4]
+[sub_resource type="PhysicsMaterial" id=1]
 
 friction = 1.0
 rough = false
 bounce = 1.0
 absorbent = false
 
-[sub_resource type="DynamicFont" id=5]
+[sub_resource type="DynamicFont" id=2]
 
 size = 48
 outline_size = 0
@@ -37,13 +37,13 @@ void fragment() {
 	COLOR = color.a > 0.0 && color.r < time_left ? vec4(1.0) : vec4(0.0);
 }"
 
-[sub_resource type="ShaderMaterial" id=6]
+[sub_resource type="ShaderMaterial" id=4]
 
 render_priority = 0
 shader = SubResource( 3 )
 shader_param/time_left = 0.8
 
-[sub_resource type="Animation" id=7]
+[sub_resource type="Animation" id=5]
 
 resource_name = "Tick"
 length = 10.0
@@ -98,12 +98,12 @@ tracks/3/keys = {
 "values": [ Color( 1, 1, 1, 1 ), Color( 0, 0, 0, 1 ), Color( 1, 1, 1, 1 ), Color( 0, 0, 0, 1 ), Color( 1, 1, 1, 1 ), Color( 0, 0, 0, 1 ), Color( 1, 1, 1, 1 ), Color( 0, 0, 0, 1 ), Color( 1, 1, 1, 1 ), Color( 0, 0, 0, 1 ) ]
 }
 
-[sub_resource type="CircleShape2D" id=8]
+[sub_resource type="CircleShape2D" id=6]
 
 custom_solver_bias = 0.0
 radius = 48.0
 
-[sub_resource type="Animation" id=12]
+[sub_resource type="Animation" id=7]
 
 resource_name = "Idle"
 length = 2.5
@@ -122,10 +122,10 @@ tracks/0/keys = {
 "values": [ Vector2( 2, -22 ), Vector2( 2, 2 ), Vector2( 2, -22 ), Vector2( 2, -22 ) ]
 }
 
-[sub_resource type="Animation" id=11]
+[sub_resource type="Animation" id=8]
 
 resource_name = "Open"
-length = 2.0
+length = 1.5
 loop = false
 step = 0.1
 tracks/0/type = "value"
@@ -135,7 +135,7 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 1, 2 ),
+"times": PoolRealArray( 0, 0.75, 1.5 ),
 "transitions": PoolRealArray( -2, -2, 0.5 ),
 "update": 0,
 "values": [ Vector2( 2, 2 ), Vector2( 2, 2 ), Vector2( 2, -22 ) ]
@@ -147,7 +147,7 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.6, 1 ),
+"times": PoolRealArray( 0, 0.45, 0.75 ),
 "transitions": PoolRealArray( 2, 1, 0 ),
 "update": 0,
 "values": [ Vector2( 1, 1 ), Vector2( 1, 1 ), Vector2( 1, 1e-005 ) ]
@@ -159,7 +159,7 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0, 1, 1.5 ),
+"times": PoolRealArray( 0, 0.75, 1.125 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
 "values": [ Vector2( 1, 0 ), Vector2( 1, 0 ), Vector2( 1, -1 ) ]
@@ -171,7 +171,7 @@ collision_layer = 2
 collision_mask = 4
 mode = 0
 mass = 1.0
-physics_material_override = SubResource( 4 )
+physics_material_override = SubResource( 1 )
 gravity_scale = 1.0
 custom_integrator = false
 continuous_cd = 0
@@ -216,7 +216,7 @@ mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 4
-custom_fonts/font = SubResource( 5 )
+custom_fonts/font = SubResource( 2 )
 text = "A"
 align = 1
 valign = 1
@@ -236,7 +236,7 @@ centered = false
 
 [node name="Timer" type="Sprite" parent="."]
 visible = false
-material = SubResource( 6 )
+material = SubResource( 4 )
 position = Vector2( 0, 16 )
 texture = ExtResource( 8 )
 
@@ -246,23 +246,23 @@ autoplay = ""
 playback_process_mode = 1
 playback_default_blend_time = 0.0
 playback_speed = 1.0
-anims/Tick = SubResource( 7 )
+anims/Tick = SubResource( 5 )
 blend_times = [  ]
 
 [node name="Collision" type="CollisionShape2D" parent="."]
 visible = false
 position = Vector2( 0, -16 )
 rotation = 1.5708
-shape = SubResource( 8 )
+shape = SubResource( 6 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 root_node = NodePath("..")
 autoplay = "Open"
 playback_process_mode = 1
 playback_default_blend_time = 0.0
-playback_speed = 1.0
-anims/Idle = SubResource( 12 )
-anims/Open = SubResource( 11 )
+playback_speed = 2.0
+anims/Idle = SubResource( 7 )
+anims/Open = SubResource( 8 )
 blend_times = [  ]
 
 [connection signal="animation_finished" from="Timer/AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]

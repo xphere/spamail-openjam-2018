@@ -97,4 +97,9 @@ func _on_Sidebar_wrong_category() -> void:
 
 
 func _on_Inbox_overflow() -> void:
+	var gameover_scene = preload("res://ui/GameOver/GameOver.tscn")
+	var gameover = gameover_scene.instance()
+
+	gameover.pause_mode = PAUSE_MODE_PROCESS
+	add_child(gameover)
 	get_tree().paused = true

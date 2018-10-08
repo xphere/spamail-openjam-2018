@@ -74,6 +74,8 @@ func send() -> void:
 	set_collision_mask_bit(4, true)
 	set_collision_mask_bit(0, false)
 
+	$AnimationPlayer.play_backwards("Open")
+
 	emit_signal("sent")
 
 
