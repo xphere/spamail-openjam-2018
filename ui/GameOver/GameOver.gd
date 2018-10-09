@@ -9,8 +9,8 @@ func set_highscore(highscore: int) -> void:
 
 
 func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("ui_cancel"):
-		get_tree().change_scene("res://ui/Title/TitleMenu.tscn")
+	if event.is_action_pressed("ui_cancel") or event.is_action_pressed("ui_accept"):
+		queue_free()
 
 
 func _ready():

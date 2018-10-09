@@ -107,3 +107,6 @@ func _on_Inbox_overflow() -> void:
 	gameover.pause_mode = PAUSE_MODE_PROCESS
 	add_child(gameover)
 	get_tree().paused = true
+	yield(gameover, "tree_exited")
+	get_tree().paused = false
+	get_tree().change_scene("res://ui/Title/TitleMenu.tscn")
