@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://ui/Title/TitleMenu.gd" type="Script" id=1]
 [ext_resource path="res://ui/Title/title-background.png" type="Texture" id=2]
@@ -6,6 +6,17 @@
 [ext_resource path="res://ui/Title/play-button.png" type="Texture" id=4]
 [ext_resource path="res://sound/button-hover.ogg" type="AudioStream" id=5]
 [ext_resource path="res://sound/button-click.ogg" type="AudioStream" id=6]
+[ext_resource path="res://sound/intro.ogg" type="AudioStream" id=7]
+[ext_resource path="res://theme/Roboto-Regular.ttf" type="DynamicFontData" id=8]
+
+[sub_resource type="DynamicFont" id=1]
+
+size = 16
+outline_size = 0
+outline_color = Color( 1, 1, 1, 1 )
+use_mipmaps = false
+use_filter = false
+font_data = ExtResource( 8 )
 
 [node name="TitleMenu" type="Control"]
 anchor_left = 0.0
@@ -112,6 +123,42 @@ autoplay = false
 stream_paused = false
 mix_target = 0
 bus = "Master"
+
+[node name="Song" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 7 )
+volume_db = 0.0
+pitch_scale = 1.0
+autoplay = true
+stream_paused = false
+mix_target = 0
+bus = "Master"
+
+[node name="Label" type="Label" parent="."]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -254.0
+margin_top = -70.0
+margin_right = -15.0
+margin_bottom = 15.0
+grow_horizontal = 0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 4
+custom_fonts/font = SubResource( 1 )
+text = "By: Berny Cantos
+ & Gerard Puertas
+For OpenJam 2018
+"
+align = 2
+valign = 2
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
 
 [connection signal="mouse_entered" from="PlayButton" to="." method="_on_PlayButton_mouse_entered"]
 [connection signal="pressed" from="PlayButton" to="." method="_on_PlayButton_pressed" flags=6]

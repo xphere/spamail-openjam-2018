@@ -1,8 +1,10 @@
 extends Area2D
 
+signal correct_category()
 signal wrong_category()
 
 var current_category
+var highscore = 0
 
 
 func get_categories() -> Array:
@@ -26,6 +28,8 @@ func _on_Sidebar_body_entered(body: PhysicsBody2D) -> void:
 	if body.tainted:
 		tainted_envelope()
 	else:
+		emit_signal("correct_category")
 		body.category.add_score(1)
+		highscore += 1
 
 	body.kill()

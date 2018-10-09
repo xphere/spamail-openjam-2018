@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://actors/envelope/Envelope.gd" type="Script" id=1]
 [ext_resource path="res://actors/envelope/back.png" type="Texture" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://actors/envelope/front.png" type="Texture" id=6]
 [ext_resource path="res://actors/envelope/flap-closed.png" type="Texture" id=7]
 [ext_resource path="res://actors/envelope/timer.png" type="Texture" id=8]
+[ext_resource path="res://sound/spam-explosion.ogg" type="AudioStream" id=9]
 
 [sub_resource type="PhysicsMaterial" id=1]
 
@@ -264,5 +265,16 @@ playback_speed = 2.0
 anims/Idle = SubResource( 7 )
 anims/Open = SubResource( 8 )
 blend_times = [  ]
+
+[node name="SpamExplodes" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 9 )
+volume_db = 0.0
+pitch_scale = 1.0
+autoplay = false
+stream_paused = false
+max_distance = 2000.0
+attenuation = 1.0
+bus = "Master"
+area_mask = 1
 
 [connection signal="animation_finished" from="Timer/AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]

@@ -68,6 +68,7 @@ func _on_Timer_timeout() -> void:
 		var envelope = $Factory.create_random_envelope()
 		$Playground.add_envelope(envelope)
 	else:
+		$MailFailed.play()
 		$Sidebar.tainted_envelope()
 
 
@@ -85,16 +86,23 @@ func _on_Playground_sent_envelope(envelope: Envelope) -> void:
 	envelope.apply_central_impulse(impulse)
 
 
+func _on_Sidebar_correct_category() -> void:
+	$MailOk.play()
+
+
 func _on_Sidebar_wrong_category() -> void:
 	var random = randi() % spam_mails.size()
 	var from = spam_mails.keys()[random]
 	$Inbox.add_message(from, spam_mails[from])
 	spam_mails.erase(from)
+	$MailFailed.play()
 
 
 func _on_Inbox_overflow() -> void:
 	var gameover_scene = preload("res://ui/GameOver/GameOver.tscn")
 	var gameover = gameover_scene.instance()
+
+	gameover.set_highscore($Sidebar.highscore)
 
 	gameover.pause_mode = PAUSE_MODE_PROCESS
 	add_child(gameover)

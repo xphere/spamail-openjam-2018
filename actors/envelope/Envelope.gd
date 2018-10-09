@@ -104,4 +104,5 @@ func set_category(category) -> void:
 
 
 func _on_AnimationPlayer_animation_finished(anim_name: String) -> void:
+	$SpamExplodes.play()
 	emit_signal("timed_out")

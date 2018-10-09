@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/mail-failed.ogg-31cb0a0d49e234662d0b111a4e6a4f68.oggstr"
+
+[deps]
+
+source_file="res://sound/mail-failed.ogg"
+dest_files=[ "res://.import/mail-failed.ogg-31cb0a0d49e234662d0b111a4e6a4f68.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

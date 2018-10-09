@@ -6,6 +6,8 @@ export var level_scene : PackedScene
 func _ready() -> void:
 	assert level_scene
 
+	randomize()
+
 	var level = level_scene.instance()
 	level.pause_mode = PAUSE_MODE_STOP
 	add_child(level)

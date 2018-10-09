@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://ui/GameOver/GameOver.gd" type="Script" id=1]
 [ext_resource path="res://actors/envelope/Envelope.tscn" type="PackedScene" id=2]
+[ext_resource path="res://theme/Roboto-Regular.ttf" type="DynamicFontData" id=3]
 
 [sub_resource type="Shader" id=1]
 
@@ -53,6 +54,15 @@ tracks/1/keys = {
 "values": [ 1.0, 0.5 ]
 }
 
+[sub_resource type="DynamicFont" id=4]
+
+size = 32
+outline_size = 0
+outline_color = Color( 1, 1, 1, 1 )
+use_mipmaps = false
+use_filter = false
+font_data = ExtResource( 3 )
+
 [node name="GameOver" type="ColorRect"]
 material = SubResource( 2 )
 anchor_left = 0.0
@@ -97,4 +107,25 @@ playback_default_blend_time = 0.0
 playback_speed = 1.0
 anims/Enter = SubResource( 3 )
 blend_times = [  ]
+
+[node name="HighScore" type="Label" parent="."]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -265.0
+margin_top = -38.0
+grow_horizontal = 0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 4
+custom_fonts/font = SubResource( 4 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Your highscore is: "
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
 

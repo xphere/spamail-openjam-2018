@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=2]
+[gd_scene load_steps=30 format=2]
 
 [ext_resource path="res://actors/level/Level.gd" type="Script" id=1]
 [ext_resource path="res://actors/level/background.png" type="Texture" id=2]
@@ -18,6 +18,10 @@
 [ext_resource path="res://actors/level/Factory.gd" type="Script" id=16]
 [ext_resource path="res://actors/envelope/Envelope.tscn" type="PackedScene" id=17]
 [ext_resource path="res://actors/level/Timer.gd" type="Script" id=18]
+[ext_resource path="res://sound/mail-failed.ogg" type="AudioStream" id=19]
+[ext_resource path="res://sound/mail-ok.ogg" type="AudioStream" id=20]
+[ext_resource path="res://sound/spam-explosion.ogg" type="AudioStream" id=21]
+[ext_resource path="res://sound/gameplay.ogg" type="AudioStream" id=22]
 
 [sub_resource type="RectangleShape2D" id=1]
 
@@ -48,7 +52,7 @@ extents = Vector2( 540, 5 )
 custom_solver_bias = 0.0
 extents = Vector2( 360, 220 )
 
-[sub_resource type="DynamicFont" id=7]
+[sub_resource type="DynamicFont" id=6]
 
 size = 10
 outline_size = 0
@@ -58,7 +62,7 @@ use_filter = true
 extra_spacing_bottom = -4
 font_data = ExtResource( 6 )
 
-[sub_resource type="Curve" id=6]
+[sub_resource type="Curve" id=7]
 
 min_value = 0.15
 max_value = 1.5
@@ -486,7 +490,7 @@ mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 4
-custom_fonts/font = SubResource( 7 )
+custom_fonts/font = SubResource( 6 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "Classify e-mails by
 its category."
@@ -570,7 +574,7 @@ mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 4
-custom_fonts/font = SubResource( 7 )
+custom_fonts/font = SubResource( 6 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "Yes, sir!
 I'll do my best!"
@@ -654,7 +658,7 @@ mouse_filter = 2
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 4
-custom_fonts/font = SubResource( 7 )
+custom_fonts/font = SubResource( 6 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "You can't fight my
 SPAM skills!"
@@ -673,11 +677,49 @@ wait_time = 2.0
 one_shot = false
 autostart = false
 script = ExtResource( 18 )
-curve = SubResource( 6 )
+curve = SubResource( 7 )
 length = null
+
+[node name="MailFailed" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 19 )
+volume_db = 0.0
+pitch_scale = 1.0
+autoplay = false
+stream_paused = false
+mix_target = 0
+bus = "Master"
+
+[node name="MailOk" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 20 )
+volume_db = 0.0
+pitch_scale = 1.0
+autoplay = false
+stream_paused = false
+mix_target = 0
+bus = "Master"
+
+[node name="SpamExplosion" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 21 )
+volume_db = 0.0
+pitch_scale = 1.0
+autoplay = false
+stream_paused = false
+mix_target = 0
+bus = "Master"
+
+[node name="Song" type="AudioStreamPlayer" parent="."]
+pause_mode = 2
+stream = ExtResource( 22 )
+volume_db = 0.0
+pitch_scale = 1.0
+autoplay = true
+stream_paused = false
+mix_target = 0
+bus = "Master"
 
 [connection signal="overflow" from="Inbox" to="." method="_on_Inbox_overflow"]
 [connection signal="body_entered" from="Sidebar" to="Sidebar" method="_on_Sidebar_body_entered"]
+[connection signal="correct_category" from="Sidebar" to="." method="_on_Sidebar_correct_category"]
 [connection signal="wrong_category" from="Sidebar" to="." method="_on_Sidebar_wrong_category"]
 [connection signal="sent_envelope" from="Playground" to="." method="_on_Playground_sent_envelope"]
 [connection signal="body_entered" from="Playground/GameArea" to="Playground" method="_on_GameArea_body_entered"]

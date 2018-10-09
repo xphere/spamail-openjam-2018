@@ -21,6 +21,7 @@ _global_script_class_icons={
 [application]
 
 config/name="OpenJam 2018"
+run/main_scene="res://ui/Title/TitleMenu.tscn"
 config/icon="res://icon.png"
 
 [display]

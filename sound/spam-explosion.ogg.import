@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/spam-explosion.ogg-257007f15d28b0ad64ee342eb6629237.oggstr"
+
+[deps]
+
+source_file="res://sound/spam-explosion.ogg"
+dest_files=[ "res://.import/spam-explosion.ogg-257007f15d28b0ad64ee342eb6629237.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0
